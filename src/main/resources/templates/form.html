@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Image Loader</title>
+</head>
+<body>
+    <form th:action="@{/downloadImages}" th:object="${apiRequestDto}" method="post">
+        <div>
+            <label for="url">URL:</label>
+            <input type="text" id="url" th:field="*{url}" />
+        </div>
+        <div>
+            <label for="directoryName">Directory Name:</label>
+            <input type="text" id="directoryName" th:field="*{directoryName}" />
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

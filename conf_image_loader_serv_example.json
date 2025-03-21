@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "apps": [
+    {
+      "version": "1.0",
+      "comments": "dev",
+      "name": "image_loader_server",
+      "server_type": "dev",
+      "url_base": "http://localhost",
+      "domain": "localhost",
+      "head_directory": "C:\\"
+    }
+  ]
+}
