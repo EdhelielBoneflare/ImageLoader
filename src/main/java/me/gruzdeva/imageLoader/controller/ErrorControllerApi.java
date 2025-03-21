@@ -5,8 +5,6 @@ import me.gruzdeva.ExceptInfoUser;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,15 +21,17 @@ public class ErrorControllerApi {
 
 
     @ExceptionHandler({Except4SupportDocumented.class})
-    public ResponseEntity<ApiResponseDto> handleSupportException(Except4SupportDocumented ex) {
-        String id = generateUniqueId();
-        String message = String.format("ID: %s. %s", id, ex.getMessage4Support());
-        logger.error(message);
+    public ModelAndView handleSupportException(Except4SupportDocumented ex) {
+
+        ErrorDetailsDto errorDetailsDto= new ErrorDetailsDto(ex.getCodeId(), ex.getErrorCode(),
+                "BindException: " + ex.getMessage4Support());
         ApiResponseDto response = new ApiResponseDto(
                 ApiResponseDto.STATUS_ERROR,
-                new ErrorDetailsDto(ex.getCodeId(), ex.getErrorCode(), "BindException: " + ex.getMessage4Support())
+                errorDetailsDto
         );
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        String message = String.format("ID: %s. %s", ex.getCodeId(), ex.getMessage4User());
+        logger.error(errorDetailsDto.getErrorMessage());
+        return new ModelAndView("error", "message", message);
     }
 
     @ExceptionHandler({ExceptInfoUser.class})

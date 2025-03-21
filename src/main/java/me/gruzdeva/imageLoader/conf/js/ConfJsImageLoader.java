@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 
 public class ConfJsImageLoader extends ConfJs {
 
-    public static final String APP_NAME = "ImageLoader_server";
+    public static final String APP_NAME = "image_loader_server";
     public static final ConfJsImageLoader instance = new ConfJsImageLoader();
     public static final String CONF_FILE_NAME = "conf_image_loader_serv.json";
 

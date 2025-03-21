@@ -4,7 +4,6 @@ import me.gruzdeva.Except4SupportDocumented;
 import me.gruzdeva.ExceptInfoUser;
 import me.gruzdeva.imageLoader.service.ParseHtmlService;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoadImageController extends ControllerBase {
     public static final String ROUTE_FORM = "/form";
     public static final String ROUTE_DOWNLOAD_IMAGES = "/downloadImages";
+
+    public static final String DOWNLOAD_COMPLETE_PAGE = "downloadComplete";
 
     private final ParseHtmlService parseHtmlService;
 
@@ -29,9 +30,10 @@ public class LoadImageController extends ControllerBase {
     }
 
     @PostMapping(ROUTE_DOWNLOAD_IMAGES)
-    public ResponseEntity<Void> loadImages(@ModelAttribute ApiRequestDto requestDto) throws ExceptInfoUser, Except4SupportDocumented {
+    public ModelAndView loadImages(@ModelAttribute ApiRequestDto requestDto) throws ExceptInfoUser, Except4SupportDocumented {
         parseHtmlService.getPageImages(requestDto.getUrl(), requestDto.getDirectoryName());
-        return ResponseEntity.ok().build();
+        ModelAndView modelAndView = new ModelAndView(DOWNLOAD_COMPLETE_PAGE);
+        return modelAndView;
     }
 
 }

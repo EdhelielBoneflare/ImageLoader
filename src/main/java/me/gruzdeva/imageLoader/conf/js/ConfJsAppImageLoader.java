@@ -18,9 +18,6 @@ public class ConfJsAppImageLoader extends ConfJsApp {
     private String headDirectory;
     public String domain;
 
-
-
-
     public static final String SERVER_TYPE_DEV = "dev";
     public static final String SERVER_TYPE_TEST = "test";
 
