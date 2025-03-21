@@ -1,9 +1,11 @@
 logs/
-download/
+head/
 target/
 
 ### Config files ###
 src/main/resources/logback.xml
+src/main/resources/application.yml
+conf_image_loader_serv.json
 
 .gradle
 build/
@@ -12,6 +14,7 @@ build/
 !**/src/test/**/build/
 
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
