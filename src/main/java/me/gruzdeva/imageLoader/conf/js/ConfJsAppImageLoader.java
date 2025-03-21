@@ -26,7 +26,7 @@ public class ConfJsAppImageLoader extends ConfJsApp {
     }
 
     @Override
-    protected void initApp(JsonNode p_xParser) throws ExceptCJsUnsupported {
+    protected void initApp(JsonNode p_xParser) throws ExceptConf {
         try {
             // TECHNICAL
             nameServer = getStringRequired(p_xParser, "name");
