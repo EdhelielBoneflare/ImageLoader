@@ -1,5 +1,6 @@
 package me.gruzdeva.imageLoader.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import me.gruzdeva.Except4SupportDocumented;
 import me.gruzdeva.ExceptInfoUser;
 
@@ -14,17 +15,23 @@ public class ErrorControllerApi {
     private static final Logger logger = LoggerFactory.getLogger(ErrorControllerApi.class);
 
     @ExceptionHandler({Except4SupportDocumented.class})
-    public ModelAndView handleSupportException(Except4SupportDocumented ex) {
+    public ModelAndView handleSupportException(HttpServletRequest req, Except4SupportDocumented ex) {
 
         ErrorDetailsDto errorDetailsDto= new ErrorDetailsDto(ex.getCodeId(), ex.getErrorCode(),
                 "BindException: " + ex.getMessage4Support());
         String message = String.format("ID: %s. %s", ex.getCodeId(), ex.getMessage4User());
         logger.error(errorDetailsDto.getErrorMessage());
-        return new ModelAndView("error", "message", message);
+        ModelAndView modelAndView = new ModelAndView("redirect:" + ErrorControllerFront.DEFAULT_URL_ERROR);
+        modelAndView.addObject(ControllerBase.PARAMETER_URL, req.getRequestURL());
+        modelAndView.addObject(ControllerBase.PARAMETER_ERROR_MESSAGE, message);
+        return modelAndView;
     }
 
     @ExceptionHandler({ExceptInfoUser.class})
-    public ModelAndView handleUserException(ExceptInfoUser ex) {
-        return new ModelAndView("error", "message", ex.getMessage());
+    public ModelAndView handleUserException(HttpServletRequest req, ExceptInfoUser ex) {
+        ModelAndView modelAndView = new ModelAndView("redirect:" + ErrorControllerFront.DEFAULT_URL_ERROR);
+        modelAndView.addObject(ControllerBase.PARAMETER_URL, req.getRequestURL());
+        modelAndView.addObject(ControllerBase.PARAMETER_ERROR_MESSAGE, ex.getMessage());
+        return modelAndView;
     }
 }

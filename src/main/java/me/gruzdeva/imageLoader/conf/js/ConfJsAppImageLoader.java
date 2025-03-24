@@ -3,7 +3,6 @@ package me.gruzdeva.imageLoader.conf.js;
 import me.gruzdeva.config.js.ConfJsApp;
 import me.gruzdeva.config.js.ConfJsDb;
 import me.gruzdeva.config.js.ExceptConf;
-import me.gruzdeva.config.js.ExceptCJsUnsupported;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;

@@ -14,7 +14,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <main class="g-main">
         <h2 style="text-align: center;" class="c-create__title title">Ошибка при выполнении запроса</h2>
         <div class="text-center text-error" th:if="${param.errorMessage} != null AND ${param.errorMessage[0]} != null">
-            Ошибка при обращении на страницу
+            Ошибка при обращении на страницу <br>
             <div th:text="${param.url[0]}" th:remove="tag"></div> возникла ошибка <br />
             <div th:text="${param.errorMessage[0]}" th:remove="tag"></div> <br /><br />
         </div>

@@ -4,8 +4,6 @@
  */
 package me.gruzdeva;
 
-import me.gruzdeva.imageLoader.Msg;
-
 import java.util.Map;
 
 /**
