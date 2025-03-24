@@ -30,6 +30,11 @@ public class Msg {
     static {
         map.put(RU_ru, new Msg(RU_ru));
         map.put(US_en, new Msg(US_en));
+
+        HashMap<String, String> messages;
+        messages = msg.getOrCreate(RU_ru);
+        messages.put(CODE_INVALID_DIRECTORY_NAME, RU_INVALID_DIRECTORY);
+        messages.put(CODE_INVALID_URL, RU_INVALID_URL);
     }
 
     private static Msg instance = map.get(RU_ru);

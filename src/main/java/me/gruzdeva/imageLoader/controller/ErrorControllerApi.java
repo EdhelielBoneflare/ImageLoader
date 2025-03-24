@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import me.gruzdeva.Except4SupportDocumented;
 import me.gruzdeva.ExceptInfoUser;
 
+import me.gruzdeva.imageLoader.Msg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
