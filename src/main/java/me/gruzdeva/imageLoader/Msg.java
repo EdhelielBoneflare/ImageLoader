@@ -17,8 +17,10 @@ public class Msg {
     public static final String RU_ru = "RU_ru";
 
     public static final String CODE_INVALID_DIRECTORY_NAME = "INVALID_DIRECTORY_NAME";
-    public static final String US_INVALID_DIRECTORY_NAME = "Unsupported directory name. Please use only latin letters, digits, and _";
-    private static final String RU_INVALID_DIRECTORY = "Не поддерживаемое имя директории. Используйте только латинские буквы, цифры и _";
+    public static final String US_INVALID_DIRECTORY_NAME = "Unsupported directory name. Use 1 or more characters. " +
+            "Only latin letters, digits, and _ are allowed";
+    private static final String RU_INVALID_DIRECTORY = "Не поддерживаемое имя директории. Используйте 1 или больше " +
+            "символов. Разрешены только латинские буквы, цифры и _";
 
     public static final String CODE_INVALID_URL = "INVALID_URL";
     public static final String US_INVALID_URL = "Unsupported URL";

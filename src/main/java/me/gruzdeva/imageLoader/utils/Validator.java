@@ -1,6 +1,6 @@
 package me.gruzdeva.imageLoader.utils;
 
-import me.gruzdeva.Except4SupportDocumented;
+import me.gruzdeva.Except4Support;
 import me.gruzdeva.ExceptInfoUser;
 import me.gruzdeva.imageLoader.Msg;
 import me.gruzdeva.imageLoader.conf.js.ConfJsAppImageLoader;
@@ -18,17 +18,17 @@ public class Validator {
         new URL(urlString);
     }
 
-    public static void validateDirectory(String directoryName) throws Except4SupportDocumented {
+    public static void validateDirectory(String directoryName) throws Except4Support {
         ConfJsAppImageLoader config = ConfJsImageLoader.getInstance().getApp();
         String headDirectory = config.getHeadDirectory();
 
         File directory = new File(headDirectory, directoryName);
         if (!directory.exists()) {
             if (!directory.mkdirs()) {
-                throw new Except4SupportDocumented("DirAccessErr01", "Directory creation error", "Cannot create directory: " + directoryName);
+                throw new Except4Support("DirAccessErr01", "Directory creation error", "Cannot create directory: " + directoryName);
             }
         } else if (!directory.isDirectory() || !directory.canWrite()) {
-            throw new Except4SupportDocumented("DirAccessErr02", "Directory access error", "Cannot access directory: " + directoryName);
+            throw new Except4Support("DirAccessErr02", "Directory access error", "Cannot access directory: " + directoryName);
         }
     }
 

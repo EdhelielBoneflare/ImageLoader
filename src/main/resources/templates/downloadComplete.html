@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Download Complete</title>
 </head>
 <body>
-    <h1>Download complete</h1>
+    <h1>Загрузка завершена</h1>
+    <div>
+        <p>Успешно загружено: <span th:text="${result[true]}"></span></p>
+        <p>Ошибки загрузки: <span th:text="${result[false]}"></span></p>
+    </div>
     <a href="/" th:href="@{/}">Вернуться на главную</a>
 </body>
 </html>

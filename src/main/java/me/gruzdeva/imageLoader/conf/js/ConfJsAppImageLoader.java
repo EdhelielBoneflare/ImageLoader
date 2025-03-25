@@ -15,6 +15,9 @@ public class ConfJsAppImageLoader extends ConfJsApp {
     private String urlBase;
     private String serverType;
     private String headDirectory;
+    private int threadPoolSize;
+    private int shutdownTimerMinutes;
+    private int connectionErrorThreshold;
     public String domain;
 
     public static final String SERVER_TYPE_DEV = "dev";
@@ -33,6 +36,9 @@ public class ConfJsAppImageLoader extends ConfJsApp {
             serverType = getStringRequired(p_xParser, "server_type");
             domain = getStringRequired(p_xParser, "domain");
             headDirectory = getStringRequired(p_xParser, "head_directory");
+            threadPoolSize = getIntRequired(p_xParser, "thread_pool_size");
+            shutdownTimerMinutes = getIntRequired(p_xParser, "shutdown_timer_minutes");
+            connectionErrorThreshold = getIntRequired(p_xParser, "connection_error_threshold");
         } catch (RuntimeException ex) {
             throw new ExceptConf("ErrConfA1", "Can't process project configuration",
                     ex.getMessage(), ex);
@@ -59,11 +65,25 @@ public class ConfJsAppImageLoader extends ConfJsApp {
         return headDirectory;
     }
 
+    public int getShutdownTimerMinutes() {
+        return shutdownTimerMinutes;
+    }
+
+    public int getThreadPoolSize() {
+        return threadPoolSize;
+    }
+
+    public int getConnectionErrorThreshold() {
+        return connectionErrorThreshold;
+    }
+
     @Override
     public String toString() {
         return "urlBase=" + urlBase + "\n"
                 + "serverType=" + serverType + "\n"
                 + "domain=" + domain + "\n"
-                + "headDirectory=" + headDirectory + "\n";
+                + "headDirectory=" + headDirectory + "\n"
+                + "threadPoolSize=" + threadPoolSize + "\n"
+                + "shutdownTimerMinutes=" + shutdownTimerMinutes + "\n";
     }
 }

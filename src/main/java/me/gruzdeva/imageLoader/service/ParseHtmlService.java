@@ -1,6 +1,6 @@
 package me.gruzdeva.imageLoader.service;
 
-import me.gruzdeva.Except4SupportDocumented;
+import me.gruzdeva.Except4Support;
 import me.gruzdeva.ExceptInfoUser;
 import me.gruzdeva.imageLoader.Msg;
 import me.gruzdeva.imageLoader.conf.js.ConfJsAppImageLoader;
@@ -19,12 +19,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ParseHtmlService {
-    private final String IMG_SRC_START = "http";
-    private final String IMG_SRC_ATTR = "src";
-    private final String IMG_TAG_REGEX = "img[src~=(?i)\\.(png|jpe?g|gif)]";
+    private static final String IMG_SRC_START = "http";
+    private static final String IMG_SRC_ATTR = "src";
+    private static final String IMG_TAG_REGEX = "img[src~=(?i)\\.(png|jpe?g|gif)]";
 
     private final LoadImageService loadImageService;
 
@@ -32,8 +33,8 @@ public class ParseHtmlService {
         this.loadImageService = loadImageService;
     }
 
-    public void getPageImages(String url, String directoryName)
-            throws Except4SupportDocumented, ExceptInfoUser{
+    public Map<Boolean, Integer> getPageImages(String url, String directoryName)
+            throws Except4Support, ExceptInfoUser {
         try {
             Validator.validateUrl(url);
         } catch (MalformedURLException e) {
@@ -42,17 +43,19 @@ public class ParseHtmlService {
 
         String directoryPath = createFullDirectoryPath(directoryName);
 
+        Document webPage;
         try {
-            Document webPage = Jsoup.connect(url).get();
-            List<URL> imgURLS = extractImgURLS(webPage, url);
-            loadImageService.downloadImages(directoryPath, imgURLS);
+            webPage = Jsoup.connect(url).get();
         } catch (IOException ex) {
-            throw new Except4SupportDocumented("ConnectErr01", "Couldn't fetch the page",
+            throw new Except4Support("ConnectErr01", "Couldn't fetch the page",
                     "Couldn't fetch HTML from page: " + url + ". " + ex.getMessage());
         }
+
+        List<URL> imgURLS = extractImgURLS(webPage, url);
+        return loadImageService.downloadImages(directoryPath, imgURLS);
     }
 
-    private String createFullDirectoryPath(String directoryName) throws Except4SupportDocumented, ExceptInfoUser {
+    private String createFullDirectoryPath(String directoryName) throws Except4Support, ExceptInfoUser {
         Validator.validateDirectoryName(directoryName);
         Validator.validateDirectory(directoryName);
 
@@ -61,7 +64,7 @@ public class ParseHtmlService {
         return headDirectory + File.separator + directoryName;
     }
 
-    private List<URL> extractImgURLS(Document webPage, String url) throws Except4SupportDocumented {
+    private List<URL> extractImgURLS(Document webPage, String url) throws Except4Support {
         List<URL> imgUrls = new ArrayList<>();
 
         Elements imgElements = webPage.select(IMG_TAG_REGEX);
@@ -71,10 +74,9 @@ public class ParseHtmlService {
                 imgSrc = url + imgSrc;
             }
             try {
-                Validator.validateUrl(imgSrc);
                 imgUrls.add(new URL(imgSrc));
             } catch (MalformedURLException ex) {
-                throw new Except4SupportDocumented("UrlCreationError01", "Error getting img url",
+                throw new Except4Support("UrlCreationError01", "Error getting img url",
                         "Created invalid url " + imgSrc + ". " + ex.getMessage());
             }
         }

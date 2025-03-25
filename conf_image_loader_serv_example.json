@@ -1,5 +1,6 @@
 {
   "version": "1.0",
+  "comments": "conf file for image loader server dev [your_name]",
   "apps": [
     {
       "version": "1.0",
@@ -8,7 +9,10 @@
       "server_type": "dev",
       "url_base": "http://localhost",
       "domain": "localhost",
-      "head_directory": "C:\\"
+      "head_directory": "C:\\",
+      "thread_pool_size": 10,
+      "shutdown_timer_minutes": 2,
+      "connection_error_threshold": 3
     }
   ]
 }
